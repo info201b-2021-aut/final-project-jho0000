@@ -1,3 +1,6 @@
+John Ho, Lucy Lin, Brianna Pak, Devina Tavathia, Kelly Wang   
+**The Kaggle csv files was too large, so please use the link instead to access the data, the link includes the whole data on their website**
+
 # Domain of Interest
 
 *Why are you interested in this field/domain?*
@@ -8,37 +11,63 @@ We all bonded over a similar interest in watching and reading about murder. We a
 
 [Seattle WA Murder/Homicide Rate 1999-2018 | MacroTrends](https://www.macrotrends.net/cities/us/wa/seattle/murder-homicide-rate-statistics)
 
-[Improving the Investigation of Homicide and the Apprehension Rate of Murderers in Washington State, 1981-1986](https://www.icpsr.umich.edu/web/NACJD/studies/6134/versions/V1/datadocumentation)
+[Washington State Criminal Activity 1990 - 2020 | Washington State Statistical Analysis Center](https://sac.ofm.wa.gov/data)
 
 [Intentional homicide victims by sex, counts and rates per 100,000 population](https://data.un.org/DocumentData.aspx?q=murder&id=431)
 
 *What data-driven questions do you hope to answer about this domain (**share at least 3**)?*
 
-- How does perpetrator age and victim age correlate?
-- How does perpetrator age correlate to the homicide type?
-- How are the homicide rates compared to other states?
-- Which cities of each state have the most homicide?
-- How do current homicide rates (past decade) compare to rates from 1980-2000?
+- How do factors of the perpetrator and victim (ex. age, race, etc.) correlate?
+- Are there trends between perpetrator age and homicide type?
+- What are the comparisons of homicide rates between other states?
+- Which cities of each state have the most homicide? Any concentrations?
+- How do current homicide rates within this decade compare to rates from previous decades (ex. 1980-1990, 1990-2000)?
 
 
 # Finding Data
 
 *Where did you download the data (e.g., a web URL)?*
 
-We downloaded our data from [Kaggle](https://www.kaggle.com/murderaccountability/homicide-reports?select=database.csv), which can be downloaded as a CVS file.
+We searched through recommended websites domains and used “homicide” and “murder” as our keywords. Kaggle, National Archive of Criminal Justice Data (NACJD), and MacroTrends were the ones we ended up on.
 
 *How was the data collected or generated? Make sure to explain who collected the data (not necessarily the same people that host the data), and who or what the data is about?*
 
-The Kaggle data was collected by the FBI’s Supplementary Homicide Report and Freedom of Information Act and compiled by the Murder Accountability Project.
+- The Kaggle data was collected by the FBI’s Supplementary Homicide Report and Freedom of Information Act and compiled by the Murder Accountability Project. It is stated that the database contains homicides dating back to 1976 plus the 22,000 not reported to the Justice Department, with classifications on race, sex, and age of both perpetrators and victims.
+
+- Washington State Statistical Analysis Center collects state data from multiple agency sources. The Criminal Justice Databook collects information on reported crimes, arrests, prison admissions, and more. The dataset we are using contains information from 1990 - 2020 and has a column for murder rates, but also variables beyond this scope, such as assault, arson, and burglary.
+
+- MacroTrends’ data is sourced from the FBI, reporting murder or homicide rates in every city in Washington from 1999 to 2018. Other types of crime not related to our project are recorded such as violent crimes, assault, robbery, and rape.
 
 *How many observations (rows) are in your data?*
 
-There are 638454 observations.
+Kaggle: 638454 observations   
+WSSAC: 1274 observations   
+MacroTrends: 157 observations   
 
 *How many features (columns) are in the data?*
 
-There are 24 features.
+Kaggle: 24 features   
+WSSAC: 203 features   
+MacroTrends: 3 features   
 
 *What questions (from above) can be answered using the data in this dataset?*
 
-All of the questions we posed above can be answered due to it's large amount of features.
+- How do factors of the perpetrator and victim (ex. age, race, etc.) correlate?
+
+The Kaggle dataset specifically has filters for victim age, race, and ethnicity. It also includes filters for perpetrator sex, age, race, and ethinicity. We will be using Kaggle to answer this question.
+
+- Are there trends between perpetrator age and homicide type?
+
+The trends between perpetrator age and homicide type can also be seen in the Kaggle dataset.
+
+- What are the comparisons of homicide rates between other states?
+
+There is a comparison chart for homicide rates in Washington State versus the US as a whole within the Macrotrends dataset. There is also potential for comparison across city (Seattle), state (Washington), and country (US). The Kaggle dataset also has an option to filter by state.
+
+- Which cities of each state have the most homicide? Any concentrations?
+
+Because the Kaggle dataset allows filtering by city and state, we will be able to answer this question through Kaggle.
+
+- How do current homicide rates within this decade compare to rates from previous decades (ex. 2000-2018, 1990-2000)?
+
+While the Macrotrends dataset contains data from 2000 to 2018 (it is the most recent), the WSSAC dataset contains data from 1990-2020. We will be able to compare across datasets and within datasets as well (the WSSAC data contains two decades).
