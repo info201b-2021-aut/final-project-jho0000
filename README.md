@@ -13,7 +13,7 @@ We all bonded over a similar interest in watching and reading about murder. We a
 
 [Washington State Criminal Activity 1990 - 2020 | Washington State Statistical Analysis Center](https://sac.ofm.wa.gov/data)
 
-[Intentional homicide victims by sex, counts and rates per 100,000 population](https://data.un.org/DocumentData.aspx?q=murder&id=431)
+[US Homicide Reports, 1980-2014 | Kaggle](https://www.kaggle.com/murderaccountability/homicide-reports?select=database.csv)
 
 *What data-driven questions do you hope to answer about this domain (**share at least 3**)?*
 
