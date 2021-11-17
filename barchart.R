@@ -7,7 +7,7 @@ library(dplyr)
 #```{r weapons, fig.width=14,fig.height=8}
 #this defines the size of the chart
 
-KaggleData <- read.csv("C:/Users/lucyl/OneDrive/Desktop/final-project-jho0000/data/KaggleData.csv")
+KaggleData <- read.csv("../final-project-jho0000/data/KaggleData.csv")
 
 homocide_data <- select(KaggleData, State, City, Year, Month, Relationship, Weapon, Incident)
 
