@@ -1,0 +1,60 @@
+---
+title: "Exploratory Analysis"
+author: "John Ho, Lucy Lin, Brianna Pak, Devina Tavathia, Kelly Wang"
+date: "11/1/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+library(readr)
+```
+
+## Introductory Paragraph
+Our group wanted to analyze the trends and correlations, if any, from homicide cases recorded in three regional scopes: nationally 
+in the U.S., in Washington state, and in the city Seattle, Washington. The data came from 
+[Kaggle](https://www.kaggle.com/murderaccountability/homicide-reports?select=database.csv), which features 24 separate columns as an overview of details and 638454 cases.
+
+* The Kaggle data was collected by the FBI’s Supplementary Homicide Report and Freedom of Information Act and compiled by the Murder 
+Accountability Project. It is stated that the database contains homicides dating back to 1976 plus the 22,000 not reported to the Justice 
+Department, with classifications on race, sex, and age of both perpetrators and victims.
+
+We wanted to explore the information through filtering data for details we would need. Things such as categorizations of the perpetrator and 
+victim, weapons used, areas with higher homicide rates, span of years and number of murders happening, all of this information was used to answer
+our research queries.
+
+### Summary Information
+Here are some questions we thought of when planning our project:
+
+* How do factors of the perpetrator and victim (ex. age, race, etc.) correlate?
+* Are there trends between perpetrator age and homicide type?
+* What are the comparisons of homicide rates between other states?
+* Which cities of each state have the most homicide cases? Any concentrations?
+* How do current homicide rates within this decade compare to rates from previous decades (ex. 2000-2018, 1990-2000)?
+
+These questions branched into more and more questions as we sorted through our data. Some statistics we sought out for were:
+
+* Cities with highest **and** lowest numbers of homicide cases in each state
+* Largest number of homicides in a single state
+* Average age of murder victims in Washington State
+* Number of total cases (rows) altogether
+
+#### Summary Table
+```{r}
+#source("Summary_Information.R", local = knitr::knit_global())
+```
+### Scatter Plot (xyz)
+
+
+```{r echo=FALSE}
+#source("Scatterplot.R", local = knitr::knit_global())
+```
+### Bar Graph (xyz)
+
+
+```{r echo=FALSE}
+#source("barchart.R", local = knitr::knit_global())
+```

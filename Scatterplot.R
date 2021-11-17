@@ -14,7 +14,7 @@ library(readr)
 KaggleData <- read_csv("~/final-project-jho0000/data/KaggleData.csv")
 View(KaggleData)
 
-#Make a new datset that groups the filtered data set by State and that summarizes 
+#Make a new dataset that groups the filtered data set by State and that summarizes 
 #the incident column by state, stored in the variable called 'filtered_state'
 filtered_year<-KaggleData%>% 
   group_by(Year) %>% 
