@@ -1,0 +1,27 @@
+---
+title: "Aggregate_Table"
+author: "Devina T"
+date: "11/15/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, include=FALSE}
+source("Summary_Information.R", local = knitr::knit_global())
+# or sys.source("your-script.R", envir = knitr::knit_global())
+```
+
+```{r}
+
+Average_Victim_Age <- avg_vicage_wa
+Amount_of_Cities_With_The_Smallest_Number_of_Homicides <- smallest_homicide
+Largest_Number_of_Homicides_in_a_Single_State <- most_homicide2
+Number_of_Columns <- num_columns
+Number_of_Rows <- num_rows
+Kaggle <- data.frame(Average_Victim_Age, Amount_of_Cities_With_The_Smallest_Number_of_Homicides, Largest_Number_of_Homicides_in_a_Single_State, Number_of_Columns, Number_of_Rows)
+Kaggle
+knitr::kable(Kaggle, "pipe", col.names = c("Average_Victim_Age", "Amount_of_Cities_With_The_Smallest_Number_of_Homicides", "Largest_Number_of_Homicides_in_a_Single_State", "Number_of_Columns", "Number_of_Rows"), align = c("l", "c", "c", "c", "r"))
+```
