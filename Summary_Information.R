@@ -1,4 +1,5 @@
 library(tidyverse)
+KaggleData <- read.csv("../final-project-jho0000/data/KaggleData.csv")
 #What is the average victim age for murders in Washington (as of the most recent year)?
 avg_vicage_wa <- filter(KaggleData, Year == max(Year))
 avg_vicage_wa <- filter(avg_vicage_wa, State == "Washington")
