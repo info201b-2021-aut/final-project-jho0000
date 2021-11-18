@@ -1,5 +1,5 @@
 library(tidyverse)
-KaggleData <- read.csv("../final-project-jho0000/data/KaggleData.csv")
+KaggleData <- read.csv("../final-project-jho0000/data/KaggleData.csv") 
 #What is the average victim age for murders in Washington (as of the most recent year)?
 avg_vicage_wa <- filter(KaggleData, Year == max(Year))
 avg_vicage_wa <- filter(avg_vicage_wa, State == "Washington")
@@ -31,7 +31,7 @@ most_homicide2 <- select(KaggleData, City, State, Year, Incident)
 most_homicide2 <- group_by(most_homicide2, State)
 most_homicide2 <- summarize(most_homicide2, MaxHomicide = sum(Incident))
 most_homicide2 <- filter(most_homicide2, MaxHomicide == max(MaxHomicide))
-View(most_homicide2)
+#View(most_homicide2)
 #Answer: Florida (8100400)
 
 
@@ -45,4 +45,4 @@ num_rows <- nrow(KaggleData)
 
 #return information as list
 summary_list <- list("Average Victim Age" = 13, "Highest number of homicides reported in a single city for each state" = most_homicide, "Amount of cities with the smallest number of homicides" = smallest_homicide, "Largest number of homicides (across all years, cumulative) in a single state" = most_homicide2, "Number of Columns" = num_columns, "Number of Rows" = num_rows)
-View(summary_list)
+#View(summary_list)

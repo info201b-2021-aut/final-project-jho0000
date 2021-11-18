@@ -4,7 +4,7 @@ author: "John Ho, Lucy Lin, Brianna Pak, Devina Tavathia, Kelly Wang"
 date: "11/1/2021"
 output: html_document
 ---
-
+Libraries Used:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(ggplot2)
@@ -16,15 +16,16 @@ library(readr)
 ## Introductory Paragraph
 Our group wanted to analyze the trends and correlations, if any, from homicide cases recorded in three regional scopes: nationally 
 in the U.S., in Washington state, and in the city Seattle, Washington. The data came from 
-[Kaggle](https://www.kaggle.com/murderaccountability/homicide-reports?select=database.csv), which features 24 separate columns as an overview of details and 638454 cases.
+[Kaggle](https://www.kaggle.com/murderaccountability/homicide-reports?select=database.csv), which features 24 separate 
+columns as an overview of details and 638454 cases.
 
-* The Kaggle data was collected by the FBI’s Supplementary Homicide Report and Freedom of Information Act and compiled by the Murder 
-Accountability Project. It is stated that the database contains homicides dating back to 1976 plus the 22,000 not reported to the Justice 
-Department, with classifications on race, sex, and age of both perpetrators and victims.
+* The Kaggle data was collected by the FBI’s Supplementary Homicide Report and Freedom of Information Act and compiled by 
+the Murder Accountability Project. It is stated that the database contains homicides dating back to 1980 plus the 22,000 
+not reported to the Justice Department, with classifications on race, sex, and age of both perpetrators and victims.
 
-We wanted to explore the information through filtering data for details we would need. Things such as categorizations of the perpetrator and 
-victim, weapons used, areas with higher homicide rates, span of years and number of murders happening, all of this information was used to answer
-our research queries.
+We wanted to explore the information through filtering data for details we would need. Things such as categorizations of 
+the perpetrator and victim, weapons used, areas with higher homicide rates, span of years and number of murders happening, 
+all of this information was used to answer our research queries.
 
 ### Summary Information
 Here are some questions we thought of when planning our project:
@@ -35,7 +36,8 @@ Here are some questions we thought of when planning our project:
 * Which cities of each state have the most homicide cases? Any concentrations?
 * How do current homicide rates within this decade compare to rates from previous decades (ex. 2000-2018, 1990-2000)?
 
-These questions branched into more and more questions as we sorted through our data. Some statistics we sought out for were:
+These questions branched into more and more questions as we sorted through our data. Some statistics we sought out for 
+were:
 
 * Cities with highest **and** lowest numbers of homicide cases in each state
 * Largest number of homicides in a single state
@@ -43,18 +45,25 @@ These questions branched into more and more questions as we sorted through our d
 * Number of total cases (rows) altogether
 
 #### Summary Table
-```{r}
-#source("Summary_Information.R", local = knitr::knit_global())
+The second set of questions were the questions we wanted to experiment with our data set. We decided to summarise the answers in our __Summary_Information.R__ file, which is displayed underneath, answering the questions in order (rendered in comments).
+
+```{r echo=FALSE message=FALSE}
+source("Summary_Information.R", local = knitr::knit_global())
+summary_list
 ```
-### Scatter Plot (xyz)
+
+#### Homicide Counts Over the Decades
 
 
 ```{r echo=FALSE}
-#source("Scatterplot.R", local = knitr::knit_global())
+source("Scatterplot.R", local = knitr::knit_global())
+year_incident_plot
 ```
-### Bar Graph (xyz)
 
+#### Popular Weapons Used in Homicide
+We wanted to investigate if there was a more commonly used weapon within all homicide cases.
 
 ```{r echo=FALSE}
-#source("barchart.R", local = knitr::knit_global())
+source("barchart.r", local = knitr::knit_global())
+weapon_barchart
 ```
