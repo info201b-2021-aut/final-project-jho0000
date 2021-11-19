@@ -5,12 +5,20 @@ date: "11/1/2021"
 output: html_document
 ---
 Libraries Used:
+```
+library(dplyr)
+library(ggplot2)
+library(gridExtra)
+library(readr)
+library(tidyverse)
+```
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-library(ggplot2)
 library(dplyr)
-library(tidyverse)
+library(ggplot2)
+library(gridExtra)
 library(readr)
+library(tidyverse)
 ```
 
 ## Introductory Paragraph
@@ -34,36 +42,48 @@ Here are some questions we thought of when planning our project:
 * Are there trends between perpetrator age and homicide type?
 * What are the comparisons of homicide rates between other states?
 * Which cities of each state have the most homicide cases? Any concentrations?
-* How do current homicide rates within this decade compare to rates from previous decades (ex. 2000-2018, 1990-2000)?
+* How do current homicide rates within this decade compare to rates from previous decades (ex. 2000-2010, 1990-2000)?
 
 These questions branched into more and more questions as we sorted through our data. Some statistics we sought out for 
 were:
 
-* Cities with highest **and** lowest numbers of homicide cases in each state
-* Largest number of homicides in a single state
 * Average age of murder victims in Washington State
+* Numbers of cities with lowest number of homicide cases
+* Largest number of homicides in a single state
+* Number of descriptions/categories (columns) in our data frame 
 * Number of total cases (rows) altogether
 
 #### Summary Table
-The second set of questions were the questions we wanted to experiment with our data set. We decided to summarise the answers in our __Summary_Information.R__ file, which is displayed underneath, answering the questions in order (rendered in comments).
+The second set of questions were the questions we wanted to experiment with our data set. We decided to summarise the answers in our _Summary_Information.R_ file, which is displayed underneath, answering the questions in order (rendered in comments).
 
-```{r echo=FALSE message=FALSE}
+```{r echo = FALSE, message = FALSE}
 source("Summary_Information.R", local = knitr::knit_global())
 summary_list
 ```
 
-#### Homicide Counts Over the Decades
+#### Homicide Counts Over the Years
+One point of interest we wanted to visualise was the amount of homicide cases in the United States over the years 1980 to 2018, by noticing any huge dips or spikes in the graph and general form. Starting from 1980, there is a gradual decline of homicide cases until 1985, gradually increasing until 1999 then returning to a longer slow decline. In 1999, we see the lowest point of the graph followed by the steepest rate of change leading to 2000, then homicide cases staying that high and even peaking in the years 2006 and 2010. The sheer number of homicide cases in the last two decades shadow over the amounts in the 1980s and 1990s, with the amount essentially doubling. From 2010, there is a noticeable decline of homicide cases before leading off with a small incline in recent years. 
 
-
-```{r echo=FALSE}
+```{r echo = FALSE}
 source("Scatterplot.R", local = knitr::knit_global())
 year_incident_plot
 ```
 
-#### Popular Weapons Used in Homicide
-We wanted to investigate if there was a more commonly used weapon within all homicide cases.
+#### Distribution of Ages of Victims and Perpetrators
 
-```{r echo=FALSE}
+```{r, echo = FALSE, fig.width = 10, fig.height = 6, warning = FALSE}
+source("histogram.R", local = knitr::knit_global())
+grid.arrange(perp_hist, vict_hist, nrow = 1)
+```
+
+#### Popular Weapons Used in Homicide
+We wanted to investigate if there was a more commonly used weapon within all homicide cases. What shows is the 
+overwhelmingly distribution of weapon usage, especially the handgun as it is the top weapon used for homicide. The next 
+common weapons are a firearm, knife, then blunt objects. The 
+
+```{r, echo = FALSE, fig.width = 14, fig.height = 8}
 source("barchart.r", local = knitr::knit_global())
 weapon_barchart
 ```
+
+#### Closing Thoughts

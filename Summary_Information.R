@@ -1,5 +1,8 @@
 library(tidyverse)
-KaggleData <- read.csv("../final-project-jho0000/data/KaggleData.csv") 
+
+# Sourcing data
+KaggleData <- read.csv("../final-project-jho0000/data/KaggleData.csv")
+
 #What is the average victim age for murders in Washington (as of the most recent year)?
 avg_vicage_wa <- filter(KaggleData, Year == max(Year))
 avg_vicage_wa <- filter(avg_vicage_wa, State == "Washington")
@@ -15,7 +18,6 @@ most_homicide <- group_by(most_homicide, City, .add=TRUE)
 most_homicide <- summarize(most_homicide, cumulation = sum(Incident))
 most_homicide <- summarize(most_homicide, MaxHomicide = max(cumulation))
 #View(most_homicide)
-
 
 #Amount of cities with the smallest number of homicides (across all years, cumulative) 
 smallest_homicide <- select(KaggleData, City, State, Year, Incident)
@@ -33,7 +35,6 @@ most_homicide2 <- summarize(most_homicide2, MaxHomicide = sum(Incident))
 most_homicide2 <- filter(most_homicide2, MaxHomicide == max(MaxHomicide))
 #View(most_homicide2)
 #Answer: Florida (8100400)
-
 
 #How many columns are in the dataset?
 num_columns <- ncol(KaggleData)

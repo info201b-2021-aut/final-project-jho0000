@@ -5,24 +5,12 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-source("histogram.R")
 library(knitr)
+library(gridExtra)
 ```
 
-```{r, echo=FALSE}
-perp_hist <- ggplot(perp_age, aes(x = Perpetrator.Age)) +
-  xlim(0, 100) +
-  labs(title="Frequencies of Perpatrator Ages", x="Age") +
-  geom_histogram(color="red", fill="red", alpha=0.5, binwidth = 5) +
-  theme_minimal()
-
-vict_hist <- ggplot(vict_age, aes(x = Victim.Age)) +
-  xlim(0, 100) +
-  labs(title="Frequencies of Victim Ages", x = "Age", fill = "white") +
-  geom_histogram(color="blue", fill="blue", alpha=0.5, binwidth = 5, position = "identity") +
-  theme_minimal()
-
-perp_hist
-vict_hist
+```{r, echo=FALSE, fig.width = 10, fig.height = 6, results='asis', message=FALSE, warning = FALSE}
+source("histogram.R", local = knitr::knit_global())
+grid.arrange(perp_hist, vict_hist, nrow = 1)
 ```
 

@@ -14,7 +14,7 @@ source("barchart.R")
 
 This is the barchart
 
-```{r weapons, fig.width=14,fig.height=8}
+```{r weapons, fig.width=14, fig.height=8}
 library(ggplot2)
 weapon_barchart <- ggplot(top10_weapons) + 
   geom_col(mapping = aes(x= Weapon, y = Weapon_Incidents, fill = Weapon))+

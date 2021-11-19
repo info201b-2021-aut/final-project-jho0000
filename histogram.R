@@ -1,28 +1,30 @@
 library(ggplot2)
 library(dplyr)
+library(gridExtra)
 
 KaggleData <- read.csv("C:/Users/kelly/Documents/UW/INFO201/final-project-jho0000/data/KaggleData.csv")
 
 KaggleData[KaggleData == 0] <- NA
-View(KaggleData)
+#View(KaggleData)
 
 KaggleData2 <- na.omit(KaggleData)
 
 perp_age <- KaggleData2 %>%
   select(Perpetrator.Age)
-View(perp_age)
+#View(perp_age)
 
 vict_age <- KaggleData2 %>%
   select(Victim.Age)
-View(vict_age)
+#View(vict_age)
 
-ggplot(perp_age, aes(x = Perpetrator.Age)) +
+perp_hist <- ggplot(perp_age, aes(x = Perpetrator.Age)) +
   xlim(0, 100) +
-  labs(title="Frequencies of Perpatrator Ages") +
-  geom_histogram(color="black", fill="white", alpha=0.5, binwidth = 5)
+  labs(title="Frequencies of Perpatrator Ages", x = "Age", y = "Count") +
+  geom_histogram(color="red", fill="red", alpha=0.5, binwidth = 5) +
+  theme_minimal()
 
-ggplot(vict_age, aes(x = Victim.Age)) +
+vict_hist <- ggplot(vict_age, aes(x = Victim.Age)) +
   xlim(0, 100) +
-  labs(title="Frequencies of Victim Ages") +
-  geom_histogram(color="black", fill="white", alpha=0.5, binwidth = 5)
-
+  labs(title="Frequencies of Victim Ages", x = "Age", y = "Count", fill = "white") +
+  geom_histogram(color= "blue", fill= "blue", alpha= 0.5, binwidth = 5, position = "identity") +
+  theme_minimal()
