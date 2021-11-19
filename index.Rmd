@@ -25,7 +25,7 @@ library(tidyverse)
 Our group wanted to analyze the trends and correlations, if any, from homicide cases recorded in three regional scopes: nationally 
 in the U.S., in Washington state, and in the city Seattle, Washington. The data came from 
 [Kaggle](https://www.kaggle.com/murderaccountability/homicide-reports?select=database.csv), which features 24 separate 
-columns as an overview of details and 638454 cases.
+columns as an overview of details and 638,454 cases.
 
 * The Kaggle data was collected by the FBI’s Supplementary Homicide Report and Freedom of Information Act and compiled by 
 the Murder Accountability Project. It is stated that the database contains homicides dating back to 1980 plus the 22,000 
@@ -53,37 +53,104 @@ were:
 * Number of descriptions/categories (columns) in our data frame 
 * Number of total cases (rows) altogether
 
-#### Summary Table
-The second set of questions were the questions we wanted to experiment with our data set. We decided to summarise the answers in our _Summary_Information.R_ file, which is displayed underneath, answering the questions in order (rendered in comments).
+### Summary Table
+The second set of questions were the questions we wanted to experiment with our data set. We decided to summarise the answers in our **Summary_Information.R** file, which is 
+displayed underneath, answering the questions in order (rendered in comments).
+Our aggregate table displays the average victim age for murders in Washington, amount of cities with the smallest number of homicides (across all years, cumulative), largest 
+number of homicides (across all years, cumulative) in a single state, how many columns are in our dataset, and how many rows are present. We do have an additional summary 
+variable (highest number of homicides reported in a single city for each state) which was not included on our table as it was a 2-column table displaying state and amount of 
+homicides. The reason we chose our summary variables are explained below:
+
+* avg_vicage_wa → A variable of the mean age of victims we wanted to compute to see just how young or possibly old victims usually are to be considered prime targets for 
+homicides. The average victim age we calculated was 13, which is quite young. There can be many reasons for this, such as young children being easy targets. In the future, we may
+decide to contrast average victim age against average perpetrator age, if computed. 
+* most_homicide → We wanted to compute at least one summary variable related to population density. This variable displays a list of states and the amount of homicides in that 
+state from the city with the highest number of murders. Later on, we can use this information to compare the population concentration in cities to the size of a state in general,
+and how this affects homicide rates.
+* smallest_homicide → Amount of cities with the smallest number of homicides was a variable because we wanted to see just how many cities have successfully kept their homicide 
+count to 1 (this was the lowest value -- no zeros for this column of the dataset). Later on, we can look into why this is for some cities and not others.
+* most_homicide2 → This variable exists to calculate the largest number of homicides in a single state, which happened to be 8100400 in Florida. Later on, we can look into why 
+Florida has so many homicides.
+* num_columns → This variable’s purpose is to quickly display the number of features in our dataset. Users will automatically know the depth of our dataset by looking at the 
+number of rows/columns listed. For columns specifically, people will know how many variables are coming into play.
+* num_rows → This variable’s purpose is to quickly display the amount of data collected on each feature (column). Again, the amount of rows is an indication of how much data was 
+collected and how in-depth the analysis of the topic is. 
 
 ```{r echo = FALSE, message = FALSE}
-source("Summary_Information.R", local = knitr::knit_global())
+source("summaryinformation.R", local = knitr::knit_global())
 summary_list
 ```
 
-#### Homicide Counts Over the Years
-One point of interest we wanted to visualise was the amount of homicide cases in the United States over the years 1980 to 2018, by noticing any huge dips or spikes in the graph and general form. Starting from 1980, there is a gradual decline of homicide cases until 1985, gradually increasing until 1999 then returning to a longer slow decline. In 1999, we see the lowest point of the graph followed by the steepest rate of change leading to 2000, then homicide cases staying that high and even peaking in the years 2006 and 2010. The sheer number of homicide cases in the last two decades shadow over the amounts in the 1980s and 1990s, with the amount essentially doubling. From 2010, there is a noticeable decline of homicide cases before leading off with a small incline in recent years. 
+### Homicide Counts Over the Years
+One point of interest we wanted to visualise was the amount of homicide cases in the United States over the years 1980 to 2018, by noticing any huge dips or spikes in the graph 
+and general form. In other words, we wanted to see any large influxes or declines of homicide numbers in the nation. 
+
+Starting from 1980, there is a gradual decline of homicide cases until 1985, gradually increasing until 1999 then returning to a longer slow decline. In 1999, we see the lowest
+point of the graph followed by the steepest rate of change leading to 2000, then homicide cases staying that high and even peaking in the years 2006 and 2010. From 2010, there is
+a noticeable decline of homicide cases before leading off with a small incline in recent years. 
+
+One takeaway is that the sheer number of homicide cases in the last two decades 
+shadow over the amounts in the 1980s and 1990s, with the amount essentially doubling in total.
 
 ```{r echo = FALSE}
-source("Scatterplot.R", local = knitr::knit_global())
+source("linechart.R", local = knitr::knit_global())
 year_incident_plot
 ```
 
-#### Distribution of Ages of Victims and Perpetrators
+### Distribution of Ages of Victims and Perpetrators
+It is important for us to see the age distribution of both homicide victims and perpetrators to notice trends or a certain demographic that account for the number of cases. 
+
+For victim ages, there is a visual bar for any age group from age 1 to 95, it crossed the entire domain of range. The most frequent age group in victims was 15-20 years 
+old, the ages of teenagers and young adults. The distribution past age 20 was a very gradual decline even past the age of 80, skewed to the right. What is disturbing is that 
+there is a consider amount of victims under the age of 10, young children and babies, around the count of 125 each.
+
+As for the perpetrators, the histogram looks very similar to the histogram for victims, minus the two bars of those who are 1-10 years old. Just like the distribution of victim 
+ages, the ages of perpetrators had the same frequency or shape in its groupings: 15-20 being the large majority of the graph with a higher peak (~2900 perpetrators compared to 
+~1750 victims), and having a right skew but only to the noticeable range of 60 years old (past this point has very slight numbers).
+
+The ages of homicide victims were spread much more than the age of perpetrators, having more range and "even" distribution. General speculations could be that younger victims are
+easier targets (mentioned in summary description) or manipulable by older perpetrators, as the balance of power is in favor for the perpetrators that way.
 
 ```{r, echo = FALSE, fig.width = 10, fig.height = 6, warning = FALSE}
 source("histogram.R", local = knitr::knit_global())
-grid.arrange(perp_hist, vict_hist, nrow = 1)
+grid.arrange(vict_hist, perp_hist, nrow = 1)
 ```
 
-#### Popular Weapons Used in Homicide
-We wanted to investigate if there was a more commonly used weapon within all homicide cases. What shows is the 
-overwhelmingly distribution of weapon usage, especially the handgun as it is the top weapon used for homicide. The next 
-common weapons are a firearm, knife, then blunt objects. The 
+### Popular Weapons Used in Homicide
+We wanted to investigate if there was a more commonly used weapon within all homicide cases, and what types of weapons were recorded in the first place. 
+
+What shows is the overwhelming measure of weapon usage, specifically the handgun as it is the top weapon used for homicide cases. The next common weapons are firearms, knives, 
+then blunt objects. Lesser frequent methods of homicide include strangulation, suffocation, and drug usage. The amount of homicide cases involving non-firearms in general are 
+very small in comparison to those with firearm usage. 
+
+It shows that the majority of perpetrators who carry out homicides have access to some sort of firearm weapon, and the handgun would be the most accessible to
+use. As assault rifles and shotguns are bigger and harder-to-get guns than handguns, it gives a reason why handguns would be the alternative being just as, if not more, 
+effective. Knives and blunt objects are not specified but both can be found in most households or establishments (as their purpose being tools), as their numbers are noteworthy 
+in the bar graph.
 
 ```{r, echo = FALSE, fig.width = 14, fig.height = 8}
 source("barchart.r", local = knitr::knit_global())
 weapon_barchart
 ```
 
-#### Closing Thoughts
+### Closing Thoughts
+There are general trends we can pull from the visualisation and interpretation from the homicide data provided by the FBI.
+
+* The number of homicide cases have been at a stable high compared to the amount in the late 1900's.
+* Teenagers and young adults have the most victims and perpetrators out of any age group.
+* Handguns are the most frequently used weapon in homicides, with other lethal weapons such as knives, blunt objects, and other guns following.
+
+There are many factors that can be put into consideration with these trends. Homicides are mostly done with accessible weapons, either from the perpetrator themselves or the 
+environment around them (ex. knives, blunt objects). Gun control and regulations has been an ongoing conflict and political discussion in U.S. society, being said to be *easy* 
+for an individual to own a gun. Connecting this to gun culture in the media and U.S. itself, it is tied to a popular culture that distributes to many types of killings. Mass 
+shootings, school shootings, gang shootings, hate crime shootings, it is not suprising to see unlawful actions being done with an easy-access lethal weapon. Gun ownership could 
+be higher in the U.S. now in comparison to decades ago, and could be the reason why there is a higher amount of homicides recently than in the past shown in the line graph.
+
+The exploitation of power, or power imbalance, can describe the distribution of older perpetrators to younger or elderly victims. The victims could not fight back or have been in
+a relationship where there is no reinforced power for them to defend themselves. Youth violence and childhood experiences could shape up adolescents and young adults to execute 
+acts of homicides, having motives or the violent culture behind them. Leading back to U.S. gun and violent culture, this could cultivate both the cumulative amount of homicide 
+cases per year, in addition to the age groups that commit them.
+
+There are many details in the data sheet, such as victim's relationship to perpetrator, race and sex of victims and perpetrators, victim count of the perpetrator, and crime type 
+that can be explored respectively for more detailed analysis on all recorded crime cases. However, our group focused on providing an overview of homicide cases in the U.S. and 
+noting any trends from the information that is gathered and visualised. 
