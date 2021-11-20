@@ -19,6 +19,10 @@ library(ggplot2)
 library(gridExtra)
 library(readr)
 library(tidyverse)
+source("summaryinformation.R", local = knitr::knit_global())
+source("linechart.R", local = knitr::knit_global())
+source("histogram.R", local = knitr::knit_global())
+source("barchart.r", local = knitr::knit_global())
 ```
 
 ## Introductory Paragraph
@@ -76,9 +80,8 @@ number of rows/columns listed. For columns specifically, people will know how ma
 * num_rows → This variable’s purpose is to quickly display the amount of data collected on each feature (column). Again, the amount of rows is an indication of how much data was 
 collected and how in-depth the analysis of the topic is. 
 
-```{r echo = FALSE, message = FALSE}
-#source("aggregatetable.Rmd", local = knitr::knit_global())
-#summary_list
+```{r, echo = FALSE, message = FALSE}
+summary_list
 ```
 
 ### Homicide Counts Over the Years
@@ -93,7 +96,6 @@ One takeaway is that the sheer number of homicide cases in the last two decades
 shadow over the amounts in the 1980s and 1990s, with the amount essentially doubling in total.
 
 ```{r echo = FALSE}
-source("linechart.R", local = knitr::knit_global())
 year_incident_plot
 ```
 
@@ -112,7 +114,6 @@ The ages of homicide victims were spread much more than the age of perpetrators,
 easier targets (mentioned in summary description) or manipulable by older perpetrators, as the balance of power is in favor for the perpetrators that way.
 
 ```{r, echo = FALSE, fig.width = 10, fig.height = 6, warning = FALSE}
-source("histogram.R", local = knitr::knit_global())
 grid.arrange(vict_hist, perp_hist, nrow = 1)
 ```
 
@@ -129,7 +130,6 @@ effective. Knives and blunt objects are not specified but both can be found in m
 in the bar graph.
 
 ```{r, echo = FALSE, fig.width = 14, fig.height = 8}
-source("barchart.r", local = knitr::knit_global())
 weapon_barchart
 ```
 

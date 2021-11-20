@@ -1,7 +1,8 @@
 library(tidyverse)
 
 # Sourcing data
-KaggleData <- read.csv("../final-project-jho0000/data/KaggleData.csv")
+
+KaggleData <- read.csv("C:/Users/John/Desktop/UW Note/INFO 201/GitHubDub/final-project-jho0000/data/KaggleData.csv")
 
 #What is the average victim age for murders in Washington (as of the most recent year)?
 avg_vicage_wa <- filter(KaggleData, Year == max(Year))
@@ -14,7 +15,7 @@ avg_vicage_wa <- select(avg_vicage_wa, average)
 #Highest number of homicides reported in a single city for each state
 most_homicide <- select(KaggleData, City, State, Year, Incident)
 most_homicide <- group_by(most_homicide, State)
-most_homicide <- group_by(most_homicide, City, .add=TRUE)
+most_homicide <- group_by(most_homicide, City, .add = TRUE)
 most_homicide <- summarize(most_homicide, cumulation = sum(Incident))
 most_homicide <- summarize(most_homicide, MaxHomicide = max(cumulation))
 #View(most_homicide)
