@@ -77,8 +77,8 @@ number of rows/columns listed. For columns specifically, people will know how ma
 collected and how in-depth the analysis of the topic is. 
 
 ```{r echo = FALSE, message = FALSE}
-source("summaryinformation.R", local = knitr::knit_global())
-summary_list
+#source("aggregatetable.Rmd", local = knitr::knit_global())
+#summary_list
 ```
 
 ### Homicide Counts Over the Years

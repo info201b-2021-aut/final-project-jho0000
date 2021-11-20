@@ -1,7 +1,7 @@
 library(ggplot2)
 library(dplyr)
 
-KaggleData <- read.csv("../final-project-jho0000/data/KaggleData.csv") 
+KaggleData <- read.csv("../final-project-jho0000/data/KaggleData.csv")
 
 homocide_data <- select(KaggleData, State, City, Year, Month, Relationship, Weapon, Incident)
 

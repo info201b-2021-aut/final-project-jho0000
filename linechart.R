@@ -6,7 +6,7 @@ library(dplyr)
 library(ggplot2)
 library(readr)
 
-KaggleData <- read.csv("../final-project-jho0000/data/KaggleData.csv") 
+KaggleData <- read.csv("../final-project-jho0000/data/KaggleData.csv")
 #View(KaggleData)
 
 #Make a new dataset that groups the filtered data set by State and that summarizes 

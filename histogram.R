@@ -2,7 +2,7 @@ library(ggplot2)
 library(dplyr)
 library(gridExtra)
 
-KaggleData <- read.csv("../final-project-jho0000/data/KaggleData.csv") 
+KaggleData <- read.csv("../final-project-jho0000/data/KaggleData.csv")
 
 KaggleData[KaggleData == 0] <- NA
 #View(KaggleData)
