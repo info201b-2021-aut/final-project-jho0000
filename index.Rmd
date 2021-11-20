@@ -20,6 +20,7 @@ library(gridExtra)
 library(readr)
 library(tidyverse)
 source("summaryinformation.R", local = knitr::knit_global())
+source("aggregatetable.R", local = knitr::knit_global())
 source("linechart.R", local = knitr::knit_global())
 source("histogram.R", local = knitr::knit_global())
 source("barchart.r", local = knitr::knit_global())
@@ -80,8 +81,11 @@ number of rows/columns listed. For columns specifically, people will know how ma
 * num_rows → This variable’s purpose is to quickly display the amount of data collected on each feature (column). Again, the amount of rows is an indication of how much data was 
 collected and how in-depth the analysis of the topic is. 
 
+The description of the aggregate is the same as the information in the summary table.
+
 ```{r, echo = FALSE, message = FALSE}
 summary_list
+Kaggle
 ```
 
 ### Homicide Counts Over the Years

@@ -11,7 +11,7 @@ library(tidyverse)
 ```
 
 ```{r, echo = FALSE, message = FALSE}
-source("summaryinformation.R", local = knitr::knit_global())
+source("aggregatetable.R", local = knitr::knit_global())
 ```
 
 ```{r, echo = FALSE}
