@@ -2,9 +2,11 @@ library("dplyr")
 library(shiny)
 library(fmsb)
 library(plotly)
-library("shinyURL")
+library(leaflet)
+library(devtools)
+library(ggmap)
 
-KaggleData <- read.csv("C:/Users/devin/Documents/201Projects/final-project-jho0000/data/KaggleData.csv")
+KaggleData <- read.csv("C:/Users/John/Desktop/UW Note/INFO 201/GitHubDub/final-project-jho0000/data/KaggleData.csv")
 
 #This is for Devina's extra map
 Kaggle <- filter(KaggleData, State == "Washington")
@@ -21,10 +23,17 @@ incidents_per_year <- KaggleData %>%
 
 
 intro_page <- tabPanel(
-  titlePanel("examining homocide"),
-  p("this does blah blah blah"),
-  shinyURL.ui()
-)
+  titlePanel("Examining Homocide"),
+  h3("A Reason to Kill For"),
+  p("In 2010, the U.S. had the highest number of homicide cases recorded in its history with the horrific number of around 800,000."),
+  br(),
+  h3("Curiosity Killed the Cat"),
+  p(""),
+  p(strong("Questions we wanted answers to: ")),
+  br(),
+  h4("Data Used in Our Research"),
+  tags$a(href = "https://www.kaggle.com/murderaccountability/homicide-reports?select=database.csv", "Source")
+  )
 
 victim_age_scatter <- tabPanel(
   titlePanel("Scatterplot of Victim Age Distribution in Washington"),
@@ -143,8 +152,6 @@ ui <- navbarPage(
 )
 
 server <- function(input, output, session) {
-  
-  shinyURL.server(session)
   
   #This is Lucy's code------------------------------------------------------------------------
 
