@@ -2,6 +2,7 @@ library("dplyr")
 library(shiny)
 library(fmsb)
 library(plotly)
+library("shinyURL")
 
 KaggleData <- read.csv("C:/Users/devin/Documents/201Projects/final-project-jho0000/data/KaggleData.csv")
 
@@ -13,11 +14,16 @@ df <- select(Kaggle, City, State)
 df <- cbind(Kaggle, geocode(paste(df$City, df$State)))
 Kaggle <- merge(Kaggle, df)
 
+#this is for Kelly's line chart
+incidents_per_year <- KaggleData %>%
+  group_by(State, Year) %>%
+  summarise(Incidents = sum(Incident))
 
 
 intro_page <- tabPanel(
   titlePanel("examining homocide"),
-  p("this does blah blah blah")
+  p("this does blah blah blah"),
+  shinyURL.ui()
 )
 
 victim_age_scatter <- tabPanel(
@@ -71,15 +77,74 @@ theMap <- tabPanel(
   )
 )
 
+Linechart_kelly <-  tabPanel(
+  titlePanel("Number of Homicide Incidents Per Year"),
+  sidebarPanel(
+    selectizeInput("selectStates", label = h3("Select state"),
+    choices = unique(incidents_per_year$State), multiple = FALSE)),
+      mainPanel(
+      plotlyOutput("line"))
+)
+
+conclusion_view<- tabPanel(
+  titlePanel("Conclusion"),
+  h1("Summary"),
+  p("Our goal for this project was to learn more about the motives,
+correlations, and data trends of homicide cases in the US. We used the Kaggle
+data set to explore these points and learn more about the data set by creating
+graphs and interpreting it. Our specific takeaways focus on the three
+things that make up a homicide which is the victim, perpetrator, and weapon used. 
+These takeaways are important to focus on as we can figure out the next steps that can be made by the government
+on how to lessen the number of homicide cases that occur in the US
+."),
+  strong("Specific Takeaway 1"),
+  p("One of the most important things to explore in the data set was the number of
+homicide cases in the US from 1980-2014. We concluded from the line graph 
+that the number of homicides has been at a stable high compared to the amount in the 
+late 1900s. This is concerning as we don't know why homicide has increased over the years
+it may be because of the increase of violent video games, easier accessibility to weapons, or
+economic and societal changes occurring. The government should look at how they are regarding
+weapon control and the main reasons that these homicides occur that way
+people know what to watch out for and report if there are any suspicions.
+"),
+  strong("Specific Takeaway 2"),
+  p("Our second takeaway is that teenagers and young adults have the most victims and perpetrators
+out of any age group. Both victims and perpetrators had the highest frequency at the age
+of 20 years old. These two may correlate with each other as they both are the highest at the same
+age. The count of victims and perpetrators both go down after the age of 20, this may be because
+of the pressure of going into adulthood and some people trying to survive and get by which
+unfortunately ends up in hurting others. The count may also go down after the age of 25
+because most people are put in jail and therefore there are not as many perpetrators
+which mean less victims. Based on this information, there should be more resources
+and help for those who are in their young adult years that way these types of events
+don't keep occurring. 
+"),
+  strong("Specific Takeaway 3"),
+  p("our last takeaway is that handguns are the most frequently used weapons in homicides by a far amount
+    than the other weapons in the dataset. This calls to the question as to why is it the most used weapon for homicides.
+    It may be because of the easiness of using the weapon or is it the most accessible for most people. If a handgun is 
+    easy to get then the government should look at how they can enforce gun control and prevent the gun from getting into the
+    wrong hands. The use of handguns aren't only seen in homicides but also seen in other events that can be heard on the news.
+"),
+  strong("Final Thoughts"),
+  p("Exploring this dataset was interesting but it does call for concern about the way our government is promoting
+    safety for citizens and how they are controlling the use and acessibility of weapons. As data is collected and evaluated,
+    we hope to see laws being changed in in order to see a decline in homicide cases compared to this Kaggle data set that we explored. ")
+) 
+
 ui <- navbarPage(
   titlePanel("The Project"),
   intro_page,
   victim_age_scatter,
-  theMap
+  theMap,
+  Linechart_kelly,
+  conclusion_view
   
 )
 
 server <- function(input, output, session) {
+  
+  shinyURL.server(session)
   
   #This is Lucy's code------------------------------------------------------------------------
 
@@ -125,6 +190,13 @@ server <- function(input, output, session) {
         opacity = 1 # legend is opaque
       )
     
+  })
+  
+  #this is kellys sexy code
+  output$line <- renderPlotly({
+    plot_ly(incidents_per_year, x = ~Year, y = ~Incidents) %>%
+      filter(State %in% input$selectStates) %>%
+      add_lines()
   })
   
 }
