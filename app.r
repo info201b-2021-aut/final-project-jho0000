@@ -39,7 +39,7 @@ intro_page <- tabPanel(icon = icon("comment"),
       tags$li("Number of homicide cases by state and year")
     ),
   p(strong("As Washingtonians, our group ultimately decided that we wanted to investigate the statistics here in Washington state, in addition to looking into the other states in the U.S.")),
-  HTML("<h2>References</h2>"),
+  HTML("<h2>Links</h2>"),
     tags$ul(
       tags$li(tags$a(href = "https://www.kaggle.com/murderaccountability/homicide-reports?select=database.csv", "Kaggle Data Source")),
       tags$li(tags$a(href = "https://info201b-2021-aut.github.io/final-project-jho0000/", "Group R Markdown Site")),
@@ -49,15 +49,21 @@ intro_page <- tabPanel(icon = icon("comment"),
 
 victim_age_scatter <- tabPanel(icon = icon("user-slash"),
   titlePanel("Victim Age Distribution in WA"),
-  HTML("<p>A point of interest we wanted to visualize was the distribution of victim ages in Washington State. Here you can look through the range and number of homicides
-  for corresponding ages for a certain year. The data spans from 1980 to 2014.</p>"),
   sidebarLayout(
-    sidebarPanel(
-      selectInput(
-        inputId = "selected_year",
-        label = "Select a Year: ",
-        choices = unique(KaggleData$Year)
+    sidebarPanel(style = "background: grey",
+      wellPanel(style = "background: white",
+        h3(strong("Plot Information")),
+        p("A point of interest we wanted to visualize was the distribution of victim ages in Washington State. Here you can look through the range and number of homicides
+        for corresponding ages for a certain year. Each datapoint has a tooltip containing its respective victim age and the amount of occurences."),
+        br(),
+        p("The data spans from 1980 to 2014."),
       ),
+      wellPanel(style = "background: white",
+        selectInput(
+          inputId = "selected_year",
+          label = "Select a Year: ",
+          choices = unique(KaggleData$Year)),
+        ),
     ),
     mainPanel(
       plotlyOutput("Incident_Scatter")
@@ -81,27 +87,30 @@ victim_age_scatter <- tabPanel(icon = icon("user-slash"),
 )
 
 theMap <- tabPanel(icon = icon("map-pin"),
-  titlePanel("Murder Locations in WA (2014)"),
-  #HTML("<p>A point of interest we wanted to visualize was the distribution of victim ages in Washington State. Here you can look through the range and number of homicides
-  #for corresponding ages for a certain year. The data spans from 1980 to 2014.</p>"),
+  titlePanel("Homicide Locations in WA (2014)"),
   # Sidebar with a selectInput for the variable for analysis
   sidebarLayout(
-    sidebarPanel(
-      selectInput(
+    sidebarPanel(style = "background: grey",
+      wellPanel(style = "background: white",
+        h3(strong("Map Information")),
+        p("Wondering where homicides happen across the state of Washington? Here you can see the locations of cases recorded in 2014 along with the month and weapon used."),
+        br(),
+        p("Note that you can also sort through the data through sex and race of the homicide victims or perpetrators.")
+      ),
+      wellPanel(style = "background: white",
+        selectInput(
         inputId = "analysis_var",
         label = "Level of Analysis",
-        choices = c("Victim.Sex", "Perpetrator.Sex", "Victim.Race", "Perpetrator.Race")
-      )
+        choices = c("Victim.Sex", "Perpetrator.Sex", "Victim.Race", "Perpetrator.Race")),
+      ),
     ),
-    
     # Display the map and table in the main panel
     mainPanel(
       leafletOutput("murder_map") # reactive output provided by leaflet
     )
   )
 )
-
-Linechart_kelly <-  tabPanel(icon = icon("chart-line"),
+Linechart_kelly <- tabPanel(icon = icon("chart-line"),
   titlePanel("Number of Homicide Incidents Per Year"),
   #HTML("<p>The number of homicide cases are not evenly distributed across every state. Here is a line graph that shows the amount of homicide cases </p>"),
   sidebarPanel(
@@ -182,8 +191,8 @@ server <- function(input, output, session) {
   }
   
   output$Incident_Scatter <- renderPlotly({
-    plot_ly(Scatter_byState(input$selected_year), x = ~Victim.Age, y = ~Incidents_in_year,  type = "scatter", mode = "markers", text = ~paste("Victim Age: ", Victim.Age, "Number of Homocide: ", Incidents_in_year))%>%
-      layout(title = 'Number of Homocides based on Victim Age in selected year in Washignton State', xaxis = list(title = 'Victim Age'), 
+    plot_ly(Scatter_byState(input$selected_year), x = ~Victim.Age, y = ~Incidents_in_year,  type = "scatter", mode = "markers", text = ~paste("Victim Age: ", Victim.Age, "Number of Homicides: ", Incidents_in_year))%>%
+      layout(title = 'Number of Homicides By Victim Age and Selected Year in WA ', xaxis = list(title = 'Victim Age'), 
              yaxis = list(title = 'Number of Homocide Incidents'), width = 1100, height = 750)
 
   })
@@ -215,7 +224,7 @@ server <- function(input, output, session) {
     
   })
   
-  #this is Kelly's sexy code
+  #this is Kelly's sexy code ----------------------------------------------------------------
   output$line <- renderPlotly({
     plot_ly(incidents_per_year, x = ~Year, y = ~Incidents) %>%
       filter(State %in% input$selectStates) %>%
