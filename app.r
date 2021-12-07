@@ -31,6 +31,7 @@ intro_page <- tabPanel(icon = icon("comment"),
                        h3(strong("Curiosity Killed the Cat")),
                        HTML("<p>When coming up with questions to answer, we had to ask ourselves <em>how big do we want our scope to be?</em> The dataset we used had 24 columns initially, 
     so we had to trim down the amount of information we wanted to work with. The main topics we wanted to analyze were:</p>"),
+<<<<<<< HEAD
                        tags$ul(
                          tags$li("Number of U.S. homicide cases over the last few decades"), 
                          tags$li("Age distribution of both homicide victims and perpetrators"), 
@@ -72,6 +73,48 @@ victim_age_scatter <- tabPanel(icon = icon("user-slash"),
                                tags$head(
                                  tags$style(HTML("
       @import url('https://fonts.googleapis.com/css?family=Rancho&effect=shadow-multiple');
+=======
+    tags$ul(
+      tags$li("Number of U.S. homicide cases over the last few decades"), 
+      tags$li("Age distribution of both homicide victims and perpetrators"), 
+      tags$li("Type of weapons used in homicide cases"),
+      tags$li("Locations where homicides occur the most and least"),
+      tags$li("Number of homicide cases by state and year")
+    ),
+  p(strong("As Washingtonians, our group ultimately decided that we wanted to investigate the statistics here in Washington state, in addition to looking into the other states in the U.S.")),
+  HTML("<h2>Links</h2>"),
+    tags$ul(
+      tags$li(tags$a(href = "https://www.kaggle.com/murderaccountability/homicide-reports?select=database.csv", "Kaggle Data Source")),
+      tags$li(tags$a(href = "https://info201b-2021-aut.github.io/final-project-jho0000/", "Group R Markdown Site")),
+    ),
+  HTML("<b>R Packages Used:</b><p> dplyr, shiny, fmsb, plotly, leaflet, devtools, ggmap, fontawesome</p>")
+)
+
+victim_age_scatter <- tabPanel(icon = icon("user-slash"),
+  titlePanel("Victim Age Distribution in WA"),
+  sidebarLayout(
+    sidebarPanel(style = "background: grey",
+      wellPanel(style = "background: white",
+        h3(strong("Plot Information")),
+        p("A point of interest we wanted to visualize was the distribution of victim ages in Washington State. Here you can look through the range and number of homicides
+        for corresponding ages for a certain year. Each datapoint has a tooltip containing its respective victim age and the amount of occurences."),
+        br(),
+        p("The data spans from 1980 to 2014."),
+      ),
+      wellPanel(style = "background: white",
+        selectInput(
+          inputId = "selected_year",
+          label = "Select a Year: ",
+          choices = unique(KaggleData$Year)),
+        ),
+    ),
+    mainPanel(
+      plotlyOutput("Incident_Scatter")
+    )
+  ),
+  tags$head(
+    tags$style(HTML("@import url('https://fonts.googleapis.com/css?family=Rancho&effect=shadow-multiple');
+>>>>>>> 1f49b0478c731f945fce6696cd890d29b0d58673
       body {
         background-color: #C3B1E1;
         color: #444444;
@@ -88,6 +131,7 @@ victim_age_scatter <- tabPanel(icon = icon("user-slash"),
 )
 
 theMap <- tabPanel(icon = icon("map-pin"),
+<<<<<<< HEAD
                    titlePanel("Homicide Locations in WA (2014)"),
                    # Sidebar with a selectInput for the variable for analysis
                    sidebarLayout(
@@ -119,6 +163,39 @@ Linechart_kelly <- tabPanel(icon = icon("chart-line"),
                                              choices = unique(incidents_per_year$State), multiple = FALSE)),
                             mainPanel(
                               plotlyOutput("line"))
+=======
+  titlePanel("Homicide Locations in WA (2014)"),
+  # Sidebar with a selectInput for the variable for analysis
+  sidebarLayout(
+    sidebarPanel(style = "background: grey",
+      wellPanel(style = "background: white",
+        h3(strong("Map Information")),
+        p("Wondering where homicides happen across the state of Washington? Here you can see the locations of cases recorded in 2014 along with the month and weapon used."),
+        br(),
+        p("Note that you can also sort through the data through sex and race of the homicide victims or perpetrators.")
+      ),
+      wellPanel(style = "background: white",
+        selectInput(
+        inputId = "analysis_var",
+        label = "Level of Analysis",
+        choices = c("Victim.Sex", "Perpetrator.Sex", "Victim.Race", "Perpetrator.Race")),
+      ),
+    ),
+    # Display the map and table in the main panel
+    mainPanel(
+      leafletOutput("murder_map") # reactive output provided by leaflet
+    )
+  )
+)
+Linechart_kelly <- tabPanel(icon = icon("chart-line"),
+  titlePanel("Number of Homicide Incidents Per Year"),
+  #HTML("<p>The number of homicide cases are not evenly distributed across every state. Here is a line graph that shows the amount of homicide cases </p>"),
+  sidebarPanel(
+    selectizeInput("selectStates", label = h3("Select state"),
+    choices = unique(incidents_per_year$State), multiple = FALSE)),
+      mainPanel(
+      plotlyOutput("line"))
+>>>>>>> 1f49b0478c731f945fce6696cd890d29b0d58673
 )
 
 conclusion_view <- tabPanel(icon = icon("book"),
@@ -167,8 +244,12 @@ don't keep occurring.
     we hope to see laws being changed in in order to see a decline in homicide cases compared to this Kaggle data set that we explored. ")
 ) 
 
+<<<<<<< HEAD
 ui <- navbarPage(
   inverse = TRUE,
+=======
+ui <- navbarPage(inverse = TRUE,
+>>>>>>> 1f49b0478c731f945fce6696cd890d29b0d58673
   titlePanel("Final Deliverable"),
   intro_page,
   victim_age_scatter,
