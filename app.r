@@ -14,14 +14,14 @@ df <- select(Kaggle, City, State)
 df <- cbind(Kaggle, geocode(paste(df$City, df$State)))
 Kaggle <- merge(Kaggle, df)
 
-#this is for Kelly's line chart
+#this is  Kelly's line chart
 incidents_per_year <- KaggleData %>%
   group_by(State, Year) %>%
   summarise(Incidents = sum(Incident))
 
 
 intro_page <- tabPanel(
-  titlePanel("examining homocide"),
+  titlePanel("Examining Homocide"),
   p("this does blah blah blah"),
   shinyURL.ui()
 )
@@ -44,15 +44,15 @@ victim_age_scatter <- tabPanel(
     tags$style(HTML("
       @import url('https://fonts.googleapis.com/css?family=Rancho&effect=shadow-multiple');
       body {
-        background-color: #ADD8E6;
+        background-color:#b19cd9;
         color: #444444;
       }
       h2 {
-        font-family: 'Rancho', serif;
-        text-shadow: 4px 4px 4px #aaa;
+        font-family: 'Trebuchet MS', sans-serif;
+        font-size: 16px;
       }
       .shiny-input-container {
-        color: #FFA500;
+        color: #FFD700;
       }"))
   )
 )
@@ -133,13 +133,13 @@ don't keep occurring.
 ) 
 
 ui <- navbarPage(
+  inverse = TRUE,
   titlePanel("The Project"),
   intro_page,
   victim_age_scatter,
   theMap,
   Linechart_kelly,
   conclusion_view
-  
 )
 
 server <- function(input, output, session) {
@@ -152,6 +152,7 @@ server <- function(input, output, session) {
      Incidents_df <- select(KaggleData, Year, State, Incident, Victim.Age) %>% 
        filter(State=="Washington") %>% 
        filter(Year==input_Year) %>% 
+       filter(Victim.Age <= 150) %>% 
        group_by(Victim.Age) %>% 
        summarise(Incidents_in_year = sum(Incident))
      
