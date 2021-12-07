@@ -70,18 +70,18 @@ victim_age_scatter <- tabPanel(icon = icon("user-slash"),
     )
   ),
   tags$head(
-    tags$style(HTML("
-      @import url('https://fonts.googleapis.com/css?family=Rancho&effect=shadow-multiple');
+    tags$style(HTML("@import url('https://fonts.googleapis.com/css?family=Rancho&effect=shadow-multiple');
       body {
-        background-color: #ADD8E6;
+        background-color: #C3B1E1;
         color: #444444;
       }
       h2 {
-        font-family: 'Rancho', serif;
-        text-shadow: 4px 4px 4px #aaa;
+        font-family: 'Arial Narrow', serif;
+        text-shadow: 1px 1px #ffffe0;
+        font-size: 20px;
       }
       .shiny-input-container {
-        color: #FFA500;
+        color: #FFD700;
       }"))
   )
 )
@@ -166,7 +166,7 @@ don't keep occurring.
     we hope to see laws being changed in in order to see a decline in homicide cases compared to this Kaggle data set that we explored. ")
 ) 
 
-ui <- navbarPage(
+ui <- navbarPage(inverse = TRUE,
   titlePanel("Final Deliverable"),
   intro_page,
   victim_age_scatter,
