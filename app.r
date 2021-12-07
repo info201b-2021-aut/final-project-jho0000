@@ -1,4 +1,4 @@
-library("dplyr")
+library(dplyr)
 library(shiny)
 library(fmsb)
 library(plotly)
@@ -8,7 +8,7 @@ library(ggmap)
 
 KaggleData <- read.csv("C:/Users/John/Desktop/UW Note/INFO 201/GitHubDub/final-project-jho0000/data/KaggleData.csv")
 
-#This is for Devina's extra map
+#Devina's extra map
 Kaggle <- filter(KaggleData, State == "Washington")
 Kaggle <- filter(Kaggle, Year == 2014)
 register_google(key = "AIzaSyCFvgKY8R37iTAFKAJlmk8S6OZITaD4BKg")
@@ -16,27 +16,38 @@ df <- select(Kaggle, City, State)
 df <- cbind(Kaggle, geocode(paste(df$City, df$State)))
 Kaggle <- merge(Kaggle, df)
 
-#this is for Kelly's line chart
+#Kelly's line chart
 incidents_per_year <- KaggleData %>%
   group_by(State, Year) %>%
   summarise(Incidents = sum(Incident))
 
-
 intro_page <- tabPanel(
   titlePanel("Examining Homocide"),
-  h3("A Reason to Kill For"),
-  p("In 2010, the U.S. had the highest number of homicide cases recorded in its history with the horrific number of around 800,000."),
-  br(),
-  h3("Curiosity Killed the Cat"),
-  p(""),
-  p(strong("Questions we wanted answers to: ")),
-  br(),
-  h4("Data Used in Our Research"),
-  tags$a(href = "https://www.kaggle.com/murderaccountability/homicide-reports?select=database.csv", "Source")
-  )
+  h3(strong("A Reason to Kill For")),
+  p("In 2010, the U.S. had the highest number of homicide cases recorded in its history. The relative volume of homicides now happening in the U.S. 
+    has grown significantly from the amount of cases reported in the late 20th century, almost doubling. What can we conclude from the loss of lives
+    all around the nation, what could be factors that lead to it?"),
+  h3(strong("Curiosity Killed the Cat")),
+  HTML("<p>When coming up with questions to answer, we had to ask ourselves <em>how big do we want our scope to be?'</em> The dataset we used had 24 columns initially, 
+    so we had to trim down the amount of information we wanted to work with. The main topics we wanted to analyze were:</p>"),
+    tags$ul(
+      tags$li("Number of U.S. homicide cases over the last few decades"), 
+      tags$li("Age distribution of both homicide victims and perpetrators"), 
+      tags$li("Type of weapons used in homicide cases"),
+      tags$li("Locations where homicides occur the most and least"),
+      tags$li("Number of homicide cases by state and year")
+    ),
+  p(strong("As Washingtonians, our group ultimately decided that we wanted to investigate the statistics here in Washington state as well as other states in the U.S.")),
+  HTML("<h2>References</h2>"),
+    tags$ul(
+      tags$li(tags$a(href = "https://www.kaggle.com/murderaccountability/homicide-reports?select=database.csv", "Kaggle Data Source")),
+      tags$li(tags$a(href = "https://info201b-2021-aut.github.io/final-project-jho0000/", "Group R Markdown Site")),
+    ),
+  HTML("<b>R Packages Used:</b><p> dplyr, shiny, fmsb, plotly, leaflet, devtools, ggmap</p>")
+)
 
 victim_age_scatter <- tabPanel(
-  titlePanel("Scatterplot of Victim Age Distribution in Washington"),
+  titlePanel("Victim Age Distribution in Washington"),
   sidebarLayout(
     sidebarPanel(
       selectInput(
@@ -68,7 +79,6 @@ victim_age_scatter <- tabPanel(
 
 theMap <- tabPanel(
   titlePanel("Murder Locations in Washington (2014)"),
-  
   # Sidebar with a selectInput for the variable for analysis
   sidebarLayout(
     sidebarPanel(
@@ -95,7 +105,7 @@ Linechart_kelly <-  tabPanel(
       plotlyOutput("line"))
 )
 
-conclusion_view<- tabPanel(
+conclusion_view <- tabPanel(
   titlePanel("Conclusion"),
   h1("Summary"),
   p("Our goal for this project was to learn more about the motives,
@@ -142,7 +152,7 @@ don't keep occurring.
 ) 
 
 ui <- navbarPage(
-  titlePanel("The Project"),
+  titlePanel("Final Deliverable"),
   intro_page,
   victim_age_scatter,
   theMap,
@@ -199,7 +209,7 @@ server <- function(input, output, session) {
     
   })
   
-  #this is kellys sexy code
+  #this is Kelly's sexy code
   output$line <- renderPlotly({
     plot_ly(incidents_per_year, x = ~Year, y = ~Incidents) %>%
       filter(State %in% input$selectStates) %>%
