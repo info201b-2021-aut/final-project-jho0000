@@ -5,6 +5,7 @@ library(plotly)
 library(leaflet)
 library(devtools)
 library(ggmap)
+library(fontawesome)
 
 KaggleData <- read.csv("C:/Users/John/Desktop/UW Note/INFO 201/GitHubDub/final-project-jho0000/data/KaggleData.csv")
 
@@ -21,14 +22,14 @@ incidents_per_year <- KaggleData %>%
   group_by(State, Year) %>%
   summarise(Incidents = sum(Incident))
 
-intro_page <- tabPanel(
+intro_page <- tabPanel(icon = icon("comment"),
   titlePanel("Examining Homocide"),
   h3(strong("A Reason to Kill For")),
   p("In 2010, the U.S. had the highest number of homicide cases recorded in its history. The relative volume of homicides now happening in the U.S. 
     has grown significantly from the amount of cases reported in the late 20th century, almost doubling. What can we conclude from the loss of lives
     all around the nation, what could be factors that lead to it?"),
   h3(strong("Curiosity Killed the Cat")),
-  HTML("<p>When coming up with questions to answer, we had to ask ourselves <em>how big do we want our scope to be?'</em> The dataset we used had 24 columns initially, 
+  HTML("<p>When coming up with questions to answer, we had to ask ourselves <em>how big do we want our scope to be?</em> The dataset we used had 24 columns initially, 
     so we had to trim down the amount of information we wanted to work with. The main topics we wanted to analyze were:</p>"),
     tags$ul(
       tags$li("Number of U.S. homicide cases over the last few decades"), 
@@ -37,17 +38,19 @@ intro_page <- tabPanel(
       tags$li("Locations where homicides occur the most and least"),
       tags$li("Number of homicide cases by state and year")
     ),
-  p(strong("As Washingtonians, our group ultimately decided that we wanted to investigate the statistics here in Washington state as well as other states in the U.S.")),
+  p(strong("As Washingtonians, our group ultimately decided that we wanted to investigate the statistics here in Washington state, in addition to looking into the other states in the U.S.")),
   HTML("<h2>References</h2>"),
     tags$ul(
       tags$li(tags$a(href = "https://www.kaggle.com/murderaccountability/homicide-reports?select=database.csv", "Kaggle Data Source")),
       tags$li(tags$a(href = "https://info201b-2021-aut.github.io/final-project-jho0000/", "Group R Markdown Site")),
     ),
-  HTML("<b>R Packages Used:</b><p> dplyr, shiny, fmsb, plotly, leaflet, devtools, ggmap</p>")
+  HTML("<b>R Packages Used:</b><p> dplyr, shiny, fmsb, plotly, leaflet, devtools, ggmap, fontawesome</p>")
 )
 
-victim_age_scatter <- tabPanel(
-  titlePanel("Victim Age Distribution in Washington"),
+victim_age_scatter <- tabPanel(icon = icon("user-slash"),
+  titlePanel("Victim Age Distribution in WA"),
+  HTML("<p>A point of interest we wanted to visualize was the distribution of victim ages in Washington State. Here you can look through the range and number of homicides
+  for corresponding ages for a certain year. The data spans from 1980 to 2014.</p>"),
   sidebarLayout(
     sidebarPanel(
       selectInput(
@@ -77,8 +80,10 @@ victim_age_scatter <- tabPanel(
   )
 )
 
-theMap <- tabPanel(
-  titlePanel("Murder Locations in Washington (2014)"),
+theMap <- tabPanel(icon = icon("map-pin"),
+  titlePanel("Murder Locations in WA (2014)"),
+  #HTML("<p>A point of interest we wanted to visualize was the distribution of victim ages in Washington State. Here you can look through the range and number of homicides
+  #for corresponding ages for a certain year. The data spans from 1980 to 2014.</p>"),
   # Sidebar with a selectInput for the variable for analysis
   sidebarLayout(
     sidebarPanel(
@@ -96,8 +101,9 @@ theMap <- tabPanel(
   )
 )
 
-Linechart_kelly <-  tabPanel(
+Linechart_kelly <-  tabPanel(icon = icon("chart-line"),
   titlePanel("Number of Homicide Incidents Per Year"),
+  #HTML("<p>The number of homicide cases are not evenly distributed across every state. Here is a line graph that shows the amount of homicide cases </p>"),
   sidebarPanel(
     selectizeInput("selectStates", label = h3("Select state"),
     choices = unique(incidents_per_year$State), multiple = FALSE)),
@@ -105,7 +111,7 @@ Linechart_kelly <-  tabPanel(
       plotlyOutput("line"))
 )
 
-conclusion_view <- tabPanel(
+conclusion_view <- tabPanel(icon = icon("book"),
   titlePanel("Conclusion"),
   h1("Summary"),
   p("Our goal for this project was to learn more about the motives,
