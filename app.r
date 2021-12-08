@@ -8,7 +8,7 @@ library(ggmap)
 library(fontawesome)
 
 #Change to load in Kaggle data csv file from directory
-KaggleData <- read.csv("C:/Users/John/Desktop/UW Note/INFO 201/GitHubDub/final-project-jho0000/data/KaggleData.csv")
+KaggleData <- read.csv("../final-project-jho0000/data/KaggleData.csv")
 
 #Devina's extra map
 Kaggle <- filter(KaggleData, State == "Washington")
@@ -24,7 +24,7 @@ incidents_per_year <- KaggleData %>%
   summarise(Incidents = sum(Incident))
 
 intro_page <- tabPanel(icon = icon("comment"),
-  titlePanel("Examining Homocide"),
+  titlePanel("Examining Homicide"),
   h3(strong("A Reason to Kill For")),
   p("In 2010, the U.S. had the highest number of homicide cases recorded in its history. The relative volume of homicides now happening in the U.S. 
     has grown significantly from the amount of cases reported in the late 20th century, almost doubling. What can we conclude from the loss of lives
@@ -40,12 +40,16 @@ intro_page <- tabPanel(icon = icon("comment"),
       tags$li("Number of homicide cases by state and year")
     ),
   p(strong("As Washingtonians, our group ultimately decided that we wanted to investigate the statistics here in Washington state, in addition to looking into the other states in the U.S.")),
+  br(),
   p(strong("Links")),
     tags$ul(
       tags$li(tags$a(href = "https://www.kaggle.com/murderaccountability/homicide-reports?select=database.csv", "Kaggle Data Source")),
       tags$li(tags$a(href = "https://info201b-2021-aut.github.io/final-project-jho0000/", "Group R Markdown Site")),
     ),
-  HTML("<b>R Packages Used:</b><p> dplyr, shiny, fmsb, plotly, leaflet, devtools, ggmap, fontawesome</p>")
+  br(),
+  HTML("<b>R Packages Used:</b><p> dplyr, shiny, fmsb, plotly, leaflet, devtools, ggmap, fontawesome</p>"),
+  HTML("<b>Group Members:</b><p>John Ho, Lucy Lin, Brianna Pak, Devina Tavathia, Kelly Wang</p>"),
+  img(src = "photo.png", height = 200, width = 400)
 )
 
 victim_age_scatter <- tabPanel(icon = icon("user-slash"),
@@ -133,48 +137,59 @@ Linechart_kelly <- tabPanel(icon = icon("chart-line"),
 
 conclusion_view <- tabPanel(icon = icon("book"),
   titlePanel("Conclusion"),
-  h1("Summary"),
-  p("Our goal for this project was to learn more about the motives,
-correlations, and data trends of homicide cases in the US. We used the Kaggle
-data set to explore these points and learn more about the data set by creating
-graphs and interpreting it. Our specific takeaways focus on the three
-things that make up a homicide which is the victim, perpetrator, and weapon used. 
-These takeaways are important to focus on as we can figure out the next steps that can be made by the government
-on how to lessen the number of homicide cases that occur in the US
-."),
-  strong("Takeaway 1"),
-  p("One of the most important things to explore in the data set was the number of
-homicide cases in the US from 1980-2014. We concluded from the line graph 
-that the number of homicides has been at a stable high compared to the amount in the 
-late 1900s. This is concerning as we don't know why homicide has increased over the years
-it may be because of the increase of violent video games, easier accessibility to weapons, or
-economic and societal changes occurring. The government should look at how they are regarding
-weapon control and the main reasons that these homicides occur that way
-people know what to watch out for and report if there are any suspicions.
-"),
-  strong("Takeaway 2"),
-  p("Our second takeaway is that teenagers and young adults have the most victims and perpetrators
-out of any age group. Both victims and perpetrators had the highest frequency at the age
-of 20 years old. These two may correlate with each other as they both are the highest at the same
-age. The count of victims and perpetrators both go down after the age of 20, this may be because
-of the pressure of going into adulthood and some people trying to survive and get by which
-unfortunately ends up in hurting others. The count may also go down after the age of 25
-because most people are put in jail and therefore there are not as many perpetrators
-which mean less victims. Based on this information, there should be more resources
-and help for those who are in their young adult years that way these types of events
-don't keep occurring. 
-"),
-  strong("Takeaway 3"),
-  p("our last takeaway is that handguns are the most frequently used weapons in homicides by a far amount
-    than the other weapons in the dataset. This calls to the question as to why is it the most used weapon for homicides.
-    It may be because of the easiness of using the weapon or is it the most accessible for most people. If a handgun is 
-    easy to get then the government should look at how they can enforce gun control and prevent the gun from getting into the
-    wrong hands. The use of handguns aren't only seen in homicides but also seen in other events that can be heard on the news.
-"),
-  strong("Final Thoughts"),
+  h2(strong("Summary")),
+  p("Our goal for this project was to learn more about the motives and
+    correlations from the data trends of homicide cases reported in the U.S. We used the Kaggle data set to 
+    explore these points and learn more about the data set by creating graphs and visualizing the numbers. 
+    Our specific takeaways focus on the details and characteristics of the people that make up a homicide: 
+    the victim, perpetrator, and weapon used. These takeaways are important to focus on as we can figure out
+    any patterns or highlight substantial numbers, which the government can use to find the next steps on how
+    to lessen homicide case numbers in the U.S."),
+  h3(strong("Takeaway 1")),
+  p("Our first takeaway is that teenagers and young adults have the most victims (and perpetrators) out 
+    of any age group. Both victims and perpetrators had the highest frequency at the age range of about 20 
+    to 25 years old. The count of victims and perpetrators both go down after the age of 25, and this may be 
+    because of the pressure of going into adulthood. However, some people try to survive and get by which 
+    unfortunately ends up hurting others. Young adults are more than capable to be independent in carrying out
+    actions even as extreme as causing a homicide. The count may also go down after the age of 25 due to most 
+    perpetrators being put in jail and therefore lessening the number of perpetrators out in public, meaning 
+    fewer chances of another victim. Based on this information, there should be more resources and help for 
+    those who are in their young adult years, or even in their adolescence, to prevent these types of events 
+    from keep occurring."),
+  h3(strong("Takeaway 2")),
+  p("A key takeaway is that handguns and firearms are the most frequently used weapons in homicides by a
+    large margin than any other weapon in the dataset. This calls to the question as to why is it so widely 
+    used for homicides. It may be because of the sheer effectiveness of using the gun, being relatively accessible
+    and easy to use. If gun control is such a prevalent problem that makes up the majority of homicide cases, 
+    then the government should look at how they can enforce gun control and prevent guns from falling into the 
+    wrong hands. The use of handguns is not only seen in homicides, but also in gun culture in the U.S. and is 
+    seen often through the media and news."),
+  h3(strong("Takeaway 3")),
+  p("One of the more intricate things to explore in the data set was the number of homicide cases across states
+    given the window of time. We concluded from the line graph that the number of homicides has been at a stable 
+    high compared to the amount in the late 1900s, with more states having a steep incline of homicide cases 
+    compared to states gradually declining. This is concerning as we cannot know exactly why homicide has increased
+    over the years, but we have some points for consideration. As mentioned before, weapons are accessible for the 
+    amount of harm they can do, and gun culture is as predominant as ever within the nation's politics. The amount
+    of guns and firearms is astoundingly high in general, being mass-produced and many people owning more than just
+    one. Gang culture can be a topic to be explored, especially with young adults and adolescents being involved as 
+    both victims and perpetrators in homicides. The government should look at how they are regulating gun control 
+    and the main reasons that these homicides occur, educating people on what to watch out for and report if there 
+    is any suspicious activity."),
+  h3(strong("Notes and Flaws in Visualizations")),
+  p("Some flaws in our visualizations include the states' line graphs not being rational with the numbers. For 
+    example, Florida's graph from 2006 onwards reports around 656k to 512k homicide incidents per year...which sounds
+    impossible. Working with messy world data that could be hard to organize, could lead to misinterpretations or 
+    inaccurate numbers. We thought for that graph in particular that the data had accumulated the number of homicide
+    incidents in that state, but saw that the numbers went up by 1 for every new row (which is odd). A few other 
+    states had unrealistic numbers in their graphs as well, having a much larger range from the typical triple-digit
+    number of homicide cases per year."),
+  p("Additionally, some of the scatter plots have a number of victims being 998 years old. Yeah, we are scratching our heads
+    too on how these outliers appeared on the data set."),
+  h2(strong("Final Thoughts")),
   p("Exploring this dataset was interesting but it does call for concern about the way our government is promoting
-    safety for citizens and how they are controlling the use and acessibility of weapons. As data is collected and evaluated,
-    we hope to see laws being changed in in order to see a decline in homicide cases compared to this Kaggle data set that we explored. ")
+    safety for citizens and how they are controlling the use and accessibility of weapons. As data is collected and evaluated,
+    we hope to see laws being changed in in order to see a decline in homicide cases compared to this Kaggle data set that we explored.")
 ) 
 
 ui <- navbarPage(inverse = TRUE,
@@ -204,7 +219,7 @@ server <- function(input, output, session) {
   output$Incident_Scatter <- renderPlotly({
     plot_ly(Scatter_byState(input$selected_year), x = ~Victim.Age, y = ~Incidents_in_year,  type = "scatter", mode = "markers", text = ~paste("Victim Age: ", Victim.Age, "Number of Homicides: ", Incidents_in_year))%>%
       layout(title = 'Number of Homicides By Victim Age and Selected Year in WA ', xaxis = list(title = 'Victim Age'), 
-             yaxis = list(title = 'Number of Homocide Incidents'), width = 1100, height = 750)
+             yaxis = list(title = 'Number of Homicide Incidents'), width = 1100, height = 750)
 
   })
   
