@@ -7,7 +7,7 @@ library(devtools)
 library(ggmap)
 library(fontawesome)
 
-#Change to load in Kaggle data csv file from directory
+#Change to load in Kaggle data csv file from directory if needed
 KaggleData <- read.csv("../final-project-jho0000/data/KaggleData.csv")
 
 #Devina's extra map
@@ -49,7 +49,7 @@ intro_page <- tabPanel(icon = icon("comment"),
   br(),
   HTML("<b>R Packages Used:</b><p> dplyr, shiny, fmsb, plotly, leaflet, devtools, ggmap, fontawesome</p>"),
   HTML("<b>Group Members:</b><p>John Ho, Lucy Lin, Brianna Pak, Devina Tavathia, Kelly Wang</p>"),
-  img(src = "photo.png", height = 200, width = 400)
+  img(src = "shiny.png")
 )
 
 victim_age_scatter <- tabPanel(icon = icon("user-slash"),
@@ -77,7 +77,7 @@ victim_age_scatter <- tabPanel(icon = icon("user-slash"),
   tags$head(
     tags$style(HTML("@import url('https://fonts.googleapis.com/css?family=Rancho&effect=shadow-multiple');
       body {
-        background-color: #C3B1E1;
+        background-color: #ffffff;
         color: #444444;
       }
       h2 {
@@ -189,7 +189,8 @@ conclusion_view <- tabPanel(icon = icon("book"),
   h2(strong("Final Thoughts")),
   p("Exploring this dataset was interesting but it does call for concern about the way our government is promoting
     safety for citizens and how they are controlling the use and accessibility of weapons. As data is collected and evaluated,
-    we hope to see laws being changed in in order to see a decline in homicide cases compared to this Kaggle data set that we explored.")
+    we hope to see laws being changed in in order to see a decline in homicide cases compared to this Kaggle data set that we explored."),
+  br()
 ) 
 
 ui <- navbarPage(inverse = TRUE,
