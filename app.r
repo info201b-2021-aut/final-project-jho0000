@@ -7,6 +7,7 @@ library(devtools)
 library(ggmap)
 library(fontawesome)
 
+#Change to load in Kaggle data csv file from directory
 KaggleData <- read.csv("C:/Users/John/Desktop/UW Note/INFO 201/GitHubDub/final-project-jho0000/data/KaggleData.csv")
 
 #Devina's extra map
@@ -39,7 +40,7 @@ intro_page <- tabPanel(icon = icon("comment"),
       tags$li("Number of homicide cases by state and year")
     ),
   p(strong("As Washingtonians, our group ultimately decided that we wanted to investigate the statistics here in Washington state, in addition to looking into the other states in the U.S.")),
-  HTML("<h2>Links</h2>"),
+  p(strong("Links")),
     tags$ul(
       tags$li(tags$a(href = "https://www.kaggle.com/murderaccountability/homicide-reports?select=database.csv", "Kaggle Data Source")),
       tags$li(tags$a(href = "https://info201b-2021-aut.github.io/final-project-jho0000/", "Group R Markdown Site")),
@@ -95,7 +96,7 @@ theMap <- tabPanel(icon = icon("map-pin"),
         h3(strong("Map Information")),
         p("Wondering where homicides happen across the state of Washington? Here you can see the locations of cases recorded in 2014 along with the month and weapon used."),
         br(),
-        p("Note that you can also sort through the data through sex and race of the homicide victims or perpetrators.")
+        p("Note that you can also sort through the data by sex and race of the homicide victims or perpetrators.")
       ),
       wellPanel(style = "background: white",
         selectInput(
@@ -110,14 +111,24 @@ theMap <- tabPanel(icon = icon("map-pin"),
     )
   )
 )
+
 Linechart_kelly <- tabPanel(icon = icon("chart-line"),
   titlePanel("Number of Homicide Incidents Per Year"),
-  #HTML("<p>The number of homicide cases are not evenly distributed across every state. Here is a line graph that shows the amount of homicide cases </p>"),
-  sidebarPanel(
-    selectizeInput("selectStates", label = h3("Select state"),
-    choices = unique(incidents_per_year$State), multiple = FALSE)),
-      mainPanel(
-      plotlyOutput("line"))
+  sidebarLayout(
+    sidebarPanel(style = "background: grey",
+      wellPanel(style = "background: white",
+        h3(strong("Graph Information")),
+        p("The number of homicide cases are not evenly distributed across every state. Here are line graphs that shows the amount of homicide cases in a selected state according to the datasheet.")
+      ),
+      wellPanel(style = "background: white", 
+        selectizeInput("selectStates", label = h3("Select state"),
+        choices = unique(incidents_per_year$State), multiple = FALSE),
+      ),
+    ),
+    mainPanel(
+      plotlyOutput("line")
+    )
+  )
 )
 
 conclusion_view <- tabPanel(icon = icon("book"),
@@ -131,7 +142,7 @@ things that make up a homicide which is the victim, perpetrator, and weapon used
 These takeaways are important to focus on as we can figure out the next steps that can be made by the government
 on how to lessen the number of homicide cases that occur in the US
 ."),
-  strong("Specific Takeaway 1"),
+  strong("Takeaway 1"),
   p("One of the most important things to explore in the data set was the number of
 homicide cases in the US from 1980-2014. We concluded from the line graph 
 that the number of homicides has been at a stable high compared to the amount in the 
@@ -141,7 +152,7 @@ economic and societal changes occurring. The government should look at how they 
 weapon control and the main reasons that these homicides occur that way
 people know what to watch out for and report if there are any suspicions.
 "),
-  strong("Specific Takeaway 2"),
+  strong("Takeaway 2"),
   p("Our second takeaway is that teenagers and young adults have the most victims and perpetrators
 out of any age group. Both victims and perpetrators had the highest frequency at the age
 of 20 years old. These two may correlate with each other as they both are the highest at the same
@@ -153,7 +164,7 @@ which mean less victims. Based on this information, there should be more resourc
 and help for those who are in their young adult years that way these types of events
 don't keep occurring. 
 "),
-  strong("Specific Takeaway 3"),
+  strong("Takeaway 3"),
   p("our last takeaway is that handguns are the most frequently used weapons in homicides by a far amount
     than the other weapons in the dataset. This calls to the question as to why is it the most used weapon for homicides.
     It may be because of the easiness of using the weapon or is it the most accessible for most people. If a handgun is 
@@ -197,7 +208,7 @@ server <- function(input, output, session) {
 
   })
   
-  #this is Devina's sexy code -------------------------------------------------------------
+  #t===his is Devina's sexy code -------------------------------------------------------------
   # Define a map to render in the UI
   output$murder_map <- renderLeaflet({
     
@@ -207,7 +218,7 @@ server <- function(input, output, session) {
       addProviderTiles("Stamen.TonerLite") %>% # add Stamen Map Tiles
       addCircleMarkers( # add markers for each murder
         lng = ~ lon,
-        lat= ~ lat,
+        lat = ~ lat,
         label = ~paste0(Month, ", ", Weapon), # add a hover label: victim's name and age
         color = ~palette_fn(Kaggle[[input$analysis_var]]), # color points by race
         fillOpacity = .7,
