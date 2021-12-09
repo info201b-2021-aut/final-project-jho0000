@@ -24,12 +24,12 @@ incidents_per_year <- KaggleData %>%
   summarise(Incidents = sum(Incident))
 
 intro_page <- tabPanel(icon = icon("comment"),
-  titlePanel("Examining Homicide"),
-  h3(strong("A Reason to Kill For")),
+  titlePanel(h3("Examining Homicide")),
+  h2(strong("A Reason to Kill For")),
   p("In 2010, the U.S. had the highest number of homicide cases recorded in its history. The relative volume of homicides now happening in the U.S. 
     has grown significantly from the amount of cases reported in the late 20th century, almost doubling. What can we conclude from the loss of lives
     all around the nation, what could be factors that lead to it?"),
-  h3(strong("Curiosity Killed the Cat")),
+  h2(strong("Curiosity Killed the Cat")),
   HTML("<p>When coming up with questions to answer, we had to ask ourselves <em>how big do we want our scope to be?</em> The dataset we used had 24 columns initially, 
     so we had to trim down the amount of information we wanted to work with. The main topics we wanted to analyze were:</p>"),
     tags$ul(
@@ -53,12 +53,12 @@ intro_page <- tabPanel(icon = icon("comment"),
 )
 
 victim_age_scatter <- tabPanel(icon = icon("user-slash"),
-  titlePanel("Victim Age Distribution in WA"),
+  titlePanel(h3("Victim Age Distribution in WA")),
   sidebarLayout(
-    sidebarPanel(style = "background: grey",
+    sidebarPanel(#style = "background: grey",
       wellPanel(style = "background: white",
-        h3(strong("Plot Information")),
-        p("A point of interest we wanted to visualize was the distribution of victim ages in Washington State. Here you can look through the range and number of homicides
+        h2(strong("Plot Information")),
+        p("A point of interest we wanted to visualize was the distribution of victim ages in Washington State. This plot shows the range and number of homicides
         for corresponding ages for a certain year. Each datapoint has a tooltip containing its respective victim age and the amount of occurences."),
         br(),
         p("The data spans from 1980 to 2014."),
@@ -80,32 +80,35 @@ victim_age_scatter <- tabPanel(icon = icon("user-slash"),
         background-color: #ffffff;
         color: #444444;
       }
+      h3 {
+        font-size: 16px;
+      }
       h2 {
-        font-family: 'Arial Narrow', serif;
-        text-shadow: 1px 1px #ffffe0;
-        font-size: 20px;
+        font-family: 'Arial', serif;
+        font-size: 18px;
+        color: #1f77b4;
       }
       .shiny-input-container {
-        color: #FFD700;
+        color: #1f77b4;
       }"))
   )
 )
 
 theMap <- tabPanel(icon = icon("map-pin"),
-  titlePanel("Homicide Locations in WA (2014)"),
+  titlePanel(h3("Homicide Locations in WA (2014)")),
   # Sidebar with a selectInput for the variable for analysis
   sidebarLayout(
-    sidebarPanel(style = "background: grey",
+    sidebarPanel(#style = "background: grey",
       wellPanel(style = "background: white",
-        h3(strong("Map Information")),
-        p("Wondering where homicides happen across the state of Washington? Here you can see the locations of cases recorded in 2014 along with the month and weapon used."),
+        h2(strong("Map Information")),
+        p("Wondering where homicides happen across the state of Washington? This map shows the locations of cases recorded in 2014 along with the month and weapon used."),
         br(),
-        p("Note that you can also sort through the data by sex and race of the homicide victims or perpetrators.")
+        p("Note that the data can be sorted by sex and race of the homicide victims or perpetrators.")
       ),
       wellPanel(style = "background: white",
         selectInput(
         inputId = "analysis_var",
-        label = "Level of Analysis",
+        label = "Level of Analysis:",
         choices = c("Victim.Sex", "Perpetrator.Sex", "Victim.Race", "Perpetrator.Race")),
       ),
     ),
@@ -117,15 +120,15 @@ theMap <- tabPanel(icon = icon("map-pin"),
 )
 
 Linechart_kelly <- tabPanel(icon = icon("chart-line"),
-  titlePanel("Number of Homicide Incidents Per Year"),
+  titlePanel(h3("Number of Homicide Incidents Per Year")),
   sidebarLayout(
-    sidebarPanel(style = "background: grey",
+    sidebarPanel(#style = "background: grey",
       wellPanel(style = "background: white",
-        h3(strong("Graph Information")),
-        p("The number of homicide cases are not evenly distributed across every state. Here are line graphs that shows the amount of homicide cases in a selected state according to the datasheet.")
+        h2(strong("Graph Information")),
+        p("The number of homicide cases are not evenly distributed across every state. This line graph shows the amount of homicide cases in a selected state according to the datasheet.")
       ),
       wellPanel(style = "background: white", 
-        selectizeInput("selectStates", label = h3("Select state"),
+        selectizeInput("selectStates", label = "Select a State:",
         choices = unique(incidents_per_year$State), multiple = FALSE),
       ),
     ),
@@ -136,7 +139,7 @@ Linechart_kelly <- tabPanel(icon = icon("chart-line"),
 )
 
 conclusion_view <- tabPanel(icon = icon("book"),
-  titlePanel("Conclusion"),
+  titlePanel(h3("Conclusion")),
   h2(strong("Summary")),
   p("Our goal for this project was to learn more about the motives and
     correlations from the data trends of homicide cases reported in the U.S. We used the Kaggle data set to 
@@ -145,7 +148,7 @@ conclusion_view <- tabPanel(icon = icon("book"),
     the victim, perpetrator, and weapon used. These takeaways are important to focus on as we can figure out
     any patterns or highlight substantial numbers, which the government can use to find the next steps on how
     to lessen homicide case numbers in the U.S."),
-  h3(strong("Takeaway 1")),
+  h2(strong("Takeaway 1")),
   p("Our first takeaway is that teenagers and young adults have the most victims (and perpetrators) out 
     of any age group. Both victims and perpetrators had the highest frequency at the age range of about 20 
     to 25 years old. The count of victims and perpetrators both go down after the age of 25, and this may be 
@@ -156,7 +159,7 @@ conclusion_view <- tabPanel(icon = icon("book"),
     fewer chances of another victim. Based on this information, there should be more resources and help for 
     those who are in their young adult years, or even in their adolescence, to prevent these types of events 
     from keep occurring."),
-  h3(strong("Takeaway 2")),
+  h2(strong("Takeaway 2")),
   p("A key takeaway is that handguns and firearms are the most frequently used weapons in homicides by a
     large margin than any other weapon in the dataset. This calls to the question as to why is it so widely 
     used for homicides. It may be because of the sheer effectiveness of using the gun, being relatively accessible
@@ -164,7 +167,7 @@ conclusion_view <- tabPanel(icon = icon("book"),
     then the government should look at how they can enforce gun control and prevent guns from falling into the 
     wrong hands. The use of handguns is not only seen in homicides, but also in gun culture in the U.S. and is 
     seen often through the media and news."),
-  h3(strong("Takeaway 3")),
+  h2(strong("Takeaway 3")),
   p("One of the more intricate things to explore in the data set was the number of homicide cases across states
     given the window of time. We concluded from the line graph that the number of homicides has been at a stable 
     high compared to the amount in the late 1900s, with more states having a steep incline of homicide cases 
@@ -176,7 +179,7 @@ conclusion_view <- tabPanel(icon = icon("book"),
     both victims and perpetrators in homicides. The government should look at how they are regulating gun control 
     and the main reasons that these homicides occur, educating people on what to watch out for and report if there 
     is any suspicious activity."),
-  h3(strong("Notes and Flaws in Visualizations")),
+  h2(strong("Notes and Flaws in Visualizations")),
   p("Some flaws in our visualizations include the states' line graphs not being rational with the numbers. For 
     example, Florida's graph from 2006 onwards reports around 656k to 512k homicide incidents per year...which sounds
     impossible. Working with messy world data that could be hard to organize, could lead to misinterpretations or 
